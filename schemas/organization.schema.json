@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://org-brain.dev/schemas/organization.schema.json",
+  "title": "OrganizationConfig",
+  "type": "object",
+  "required": ["api_version", "organization", "storage", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "api_version": { "const": "org-brain/v1" },
+    "organization": {
+      "type": "object",
+      "required": ["id", "display_name"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "display_name": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "storage": {
+      "type": "object",
+      "required": ["database_url_env", "data_directory"],
+      "properties": {
+        "database_url_env": { "type": "string" },
+        "data_directory": { "type": "string" },
+        "retention_days": { "type": "integer", "minimum": 1, "default": 365 }
+      },
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "properties": {
+        "default_provider": { "type": "string" },
+        "extraction_model_env": { "type": "string" },
+        "answer_model_env": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "path"],
+            "properties": {
+              "id": { "type": "string" },
+              "path": { "type": "string" },
+              "url": { "type": "string" },
+              "revision": { "type": "string", "default": "HEAD" },
+              "access_scope": { "type": "string", "default": "read-only" },
+              "enabled": { "type": "boolean", "default": true }
+            },
+            "additionalProperties": false
+          }
+        },
+        "documentation": { "type": "object" },
+        "issue_tracker": { "type": "object" },
+        "observability": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "connectors": { "type": "object" },
+    "indexing": {
+      "type": "object",
+      "properties": {
+        "include": { "type": "array", "items": { "type": "string" } },
+        "exclude": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "tenant_isolation": { "type": "string" },
+        "redact_secrets": { "type": "boolean" },
+        "enforce_source_permissions": { "type": "boolean" },
+        "allow_destructive_actions": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "max_graph_depth": { "type": "integer", "minimum": 1, "default": 3 },
+        "max_nodes": { "type": "integer", "minimum": 1, "default": 50 },
+        "token_budget": { "type": "integer", "minimum": 100, "default": 8000 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

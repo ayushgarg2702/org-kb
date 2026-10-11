@@ -1,0 +1,32 @@
+cases:
+  - id: dashboard-faster
+    question: "Make the personal dashboard load faster."
+    expected_status: answered
+    expected_entity_names:
+      - PersonalDashboard
+      - fetchPersonalDashboard
+      - personal_dashboard
+      - get_dashboard_payload
+      - user_dashboard
+    expected_path_contains:
+      - "/api/dashboard"
+      - "user_dashboard"
+    forbidden_claims:
+      - "definitely caused by Redis"
+    method: evidence_overlap
+
+  - id: insufficient-evidence
+    question: "Why is the payments ledger failing in production region eu-west-3?"
+    expected_status: insufficient_evidence
+    expected_entity_names: []
+    forbidden_claims:
+      - "root cause is"
+    method: status_match
+
+  - id: worker-path
+    question: "What consumes dashboard.viewed events?"
+    expected_status: answered
+    expected_entity_names:
+      - handle_dashboard_viewed
+      - dashboard.viewed
+    method: evidence_overlap

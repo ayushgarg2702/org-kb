@@ -1,0 +1,17 @@
+connectors:
+  - connector_id: git.local
+    enabled: true
+    profile: repository_read
+  - connector_id: docs.markdown
+    enabled: true
+    profile: repository_read
+  - connector_id: issues.local
+    enabled: true
+    profile: repository_read
+  - connector_id: otel.http
+    enabled: false
+    profile: operational_read
+  - connector_id: mcp.generic
+    enabled: false
+    profile: metadata_only
+    allowlist_tools: []

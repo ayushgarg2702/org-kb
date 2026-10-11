@@ -1,0 +1,79 @@
+api_version: org-brain/v1
+
+organization:
+  id: example-org
+  display_name: Example Organization
+
+storage:
+  database_url_env: ORG_BRAIN_DATABASE_URL
+  data_directory: ./var/org-brain
+  retention_days: 365
+
+models:
+  default_provider: none
+  extraction_model_env: ORG_BRAIN_EXTRACTION_MODEL
+  answer_model_env: ORG_BRAIN_ANSWER_MODEL
+
+sources:
+  repositories:
+    - id: frontend-app
+      path: ../examples/synthetic-organization/frontend-app
+      revision: HEAD
+      access_scope: read-only
+      enabled: true
+    - id: backend-service
+      path: ../examples/synthetic-organization/backend-service
+      revision: HEAD
+      access_scope: read-only
+      enabled: true
+    - id: worker-service
+      path: ../examples/synthetic-organization/worker-service
+      revision: HEAD
+      access_scope: read-only
+      enabled: true
+  documentation:
+    enabled: true
+    path: ../examples/synthetic-organization/docs
+  issue_tracker:
+    enabled: true
+    path: ../examples/synthetic-organization/docs/incidents
+  observability:
+    enabled: false
+
+connectors:
+  mcp:
+    enabled: false
+    allowlist: []
+
+indexing:
+  include:
+    - "**/*.py"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.js"
+    - "**/*.jsx"
+    - "**/*.go"
+    - "**/*.sql"
+    - "**/*.yaml"
+    - "**/*.yml"
+    - "**/*.md"
+    - "**/*.json"
+  exclude:
+    - "**/node_modules/**"
+    - "**/.git/**"
+    - "**/vendor/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/*lock*"
+    - "**/generated/**"
+
+security:
+  tenant_isolation: required
+  redact_secrets: true
+  enforce_source_permissions: true
+  allow_destructive_actions: false
+
+query:
+  max_graph_depth: 3
+  max_nodes: 50
+  token_budget: 8000

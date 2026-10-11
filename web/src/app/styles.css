@@ -1,0 +1,78 @@
+:root {
+  --bg: #0f1419;
+  --panel: #1a222c;
+  --text: #e7eef7;
+  --muted: #9aabb8;
+  --accent: #3d9cf0;
+  --verified: #3ecf8e;
+  --inferred: #f0b429;
+  --unknown: #8b95a1;
+  --conflict: #ef6b6b;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; background: var(--bg); color: var(--text); }
+
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  height: 100%;
+}
+
+.sidebar, .details {
+  background: var(--panel);
+  padding: 1rem;
+  overflow: auto;
+  border-right: 1px solid #2a3542;
+}
+
+.details { border-right: none; border-left: 1px solid #2a3542; }
+
+h1 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+h2 { font-size: 0.95rem; color: var(--muted); font-weight: 600; }
+
+.legend { list-style: none; padding: 0; margin: 1rem 0; font-size: 0.85rem; }
+.legend li { margin: 0.35rem 0; display: flex; gap: 0.5rem; align-items: center; }
+.swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.swatch.verified { background: var(--verified); }
+.swatch.inferred { background: var(--inferred); }
+.swatch.unknown { background: var(--unknown); }
+.swatch.conflict { background: var(--conflict); }
+
+#cy {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 20%, #182230 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #15202b 0%, transparent 45%),
+    var(--bg);
+}
+
+button, input {
+  background: #243140;
+  color: var(--text);
+  border: 1px solid #354657;
+  border-radius: 6px;
+  padding: 0.45rem 0.7rem;
+}
+
+button { cursor: pointer; }
+button:hover { border-color: var(--accent); }
+.search { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+.search input { flex: 1; }
+.meta { font-size: 0.8rem; color: var(--muted); white-space: pre-wrap; }
+.evidence { margin-top: 0.75rem; font-size: 0.8rem; }
+.evidence pre {
+  background: #10161d;
+  padding: 0.5rem;
+  border-radius: 6px;
+  overflow: auto;
+}
+.banner {
+  grid-column: 1 / -1;
+  background: #3a2f14;
+  color: #ffe6a8;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+}

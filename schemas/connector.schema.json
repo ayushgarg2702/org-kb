@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://org-brain.dev/schemas/connector.schema.json",
+  "title": "ConnectorDescriptor",
+  "type": "object",
+  "required": [
+    "connector_id",
+    "version",
+    "source_type",
+    "capabilities"
+  ],
+  "properties": {
+    "connector_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "enumerate": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "boolean"
+        },
+        "incremental": {
+          "type": "boolean"
+        },
+        "webhooks": {
+          "type": "boolean"
+        },
+        "historical": {
+          "type": "boolean"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "write": {
+          "type": "boolean"
+        }
+      }
+    },
+    "auth_method": {
+      "type": "string"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

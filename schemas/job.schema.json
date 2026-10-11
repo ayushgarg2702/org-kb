@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://org-brain.dev/schemas/job.schema.json",
+  "title": "Job",
+  "type": "object",
+  "required": [
+    "id",
+    "organization_id",
+    "job_type",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "job_type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "PREFLIGHT",
+        "DISCOVERY",
+        "INVENTORY",
+        "PARSING",
+        "NORMALIZATION",
+        "INDEXING",
+        "VALIDATION",
+        "PUBLISHED",
+        "FAILED",
+        "CANCELLED",
+        "PARTIAL",
+        "NEEDS_HUMAN_INPUT"
+      ]
+    },
+    "progress": {
+      "type": "object"
+    },
+    "error_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "knowledge_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

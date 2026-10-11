@@ -1,0 +1,28 @@
+api_version: org-brain/v1
+default_profile: repository_read
+profiles:
+  metadata_only:
+    can_read_source: false
+    can_read_ops: false
+    can_read_schema: false
+    can_write: false
+  repository_read:
+    can_read_source: true
+    can_read_ops: false
+    can_read_schema: false
+    can_write: false
+  operational_read:
+    can_read_source: true
+    can_read_ops: true
+    can_read_schema: false
+    can_write: false
+  schema_read:
+    can_read_source: true
+    can_read_ops: false
+    can_read_schema: true
+    can_write: false
+  action_capable:
+    can_read_source: true
+    can_read_ops: true
+    can_read_schema: true
+    can_write: true

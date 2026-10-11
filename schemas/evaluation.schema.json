@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://org-brain.dev/schemas/evaluation.schema.json",
+  "title": "EvaluationCase",
+  "type": "object",
+  "required": [
+    "id",
+    "question",
+    "expected_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "expected_status": {
+      "type": "string"
+    },
+    "expected_entity_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "method": {
+      "type": "string"
+    }
+  }
+}

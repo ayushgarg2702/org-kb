@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: org-brain
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: org-brain
+  template:
+    metadata:
+      labels:
+        app: org-brain
+    spec:
+      containers:
+        - name: api
+          image: org-brain:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: org-brain-secrets
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000

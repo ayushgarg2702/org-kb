@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: orgbrain
+          POSTGRES_PASSWORD: orgbrain
+          POSTGRES_DB: orgbrain
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U orgbrain"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      ORG_BRAIN_DATABASE_URL: postgresql+psycopg://orgbrain:orgbrain@localhost:5432/orgbrain
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check src tests && ruff format --check src tests
+      - name: Typecheck
+        run: mypy src/org_brain
+      - name: Migrate
+        run: alembic upgrade head
+      - name: Test
+        run: pytest -q
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npm run build
+      - run: npm test -- --run

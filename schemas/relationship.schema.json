@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://org-brain.dev/schemas/relationship.schema.json",
+  "title": "Relationship",
+  "type": "object",
+  "required": [
+    "id",
+    "organization_id",
+    "source_entity_id",
+    "target_entity_id",
+    "type",
+    "relationship_origin",
+    "schema_version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "source_entity_id": {
+      "type": "string"
+    },
+    "target_entity_id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "attributes": {
+      "type": "object"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relationship_origin": {
+      "type": "string",
+      "enum": [
+        "statically_declared",
+        "parser_extracted",
+        "runtime_observed",
+        "human_confirmed",
+        "model_inferred",
+        "imported"
+      ]
+    },
+    "confidence_class": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "observed",
+        "inferred",
+        "conflicting",
+        "stale",
+        "unknown"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    }
+  }
+}
